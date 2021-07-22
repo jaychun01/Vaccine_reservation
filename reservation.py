@@ -1,28 +1,26 @@
-
-
-
 from selenium import webdriver
 
-driver = webdriver.Chrome('C:\\Users\\천재관\\Downloads\\chromedriver_win32\\chromedriver.exe')
+driver = webdriver.Chrome('C:\\chromedriver.exe')
 
 
 url =""
-# 암묵적으로 웹 자원을 (최대) 5초 기다리기DRIVER_DIR)
+#waiting until chrome is opened
 driver.implicitly_wait(5)
-# 크롬 브라우저가 실행되며 해당 url로 이동한다.
+# move to website
 driver.get(url)
 
-#로그인페이지
+#login page
 driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[1]/div[2]/div[1]/input").send_keys("")
 driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[2]/div[2]/div[1]/input").send_keys("")
 driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input").click()
 driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[4]/button").click()
 
 
-# 2페이지
+# finding in detail
 driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[4]/button").click()
 driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/button[1]").click()
-#예약가능한 병원 클릭
+
+# finding in detail
 driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label").click()
 driver.implicitly_wait(3)
 try:
