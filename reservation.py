@@ -27,4 +27,4 @@ try:
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/ul/li[1]").click()
 except:
     driver.get(url)
- 
+  
