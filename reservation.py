@@ -10,8 +10,6 @@ def beepsound():
     sd.Beep(fr, du) # winsound.Beep(frequency, duration)
 
 def main():
-
-
     url =""
     #waiting until chrome is opened
     driver.implicitly_wait(5)
