@@ -22,7 +22,6 @@ def main():
     driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input").click()
     driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[4]/button").click()
 
-
     # finding in detail
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[4]/button").click()
     driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/button[1]").click()
