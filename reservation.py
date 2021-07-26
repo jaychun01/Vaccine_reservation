@@ -14,7 +14,6 @@ def searchingCalendar():
     month_chk=""
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[9]/button").click()
 
-    #checkbox check logic here
     #click calendar
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/form/div[3]/div[3]/div[1]").click()
     time.sleep(3)
@@ -38,22 +37,27 @@ def searchingCalendar():
     return month_chk
 
 def findingByPlace():
+    time.sleep(3)
     # finding in detail by place
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[4]/button").click()
     driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/button[1]").click()
 
+    #checkbox check logic
     # finding in avaiable only
-    driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input").click() #인풋박스 체크가 잘 안됨
-    if driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input").get_attribute('checked'):
-        print("-----------------checked--------------------------")
-    time.sleep(5)
+    cb_chk=driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input")
+    print(cb_chk.is_selected())
+    if cb_chk.is_selected()==False:
+        driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input").click()
+        time.sleep(5)
+    #retrun value check
+    chk=""
     try:
         driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/ul/li[1]").click()
         chk=searchingCalendar()
     except:
         driver.get(url)
         findingByPlace()
-    return chk
+    print(chk)
 
 def main():
     global url
@@ -66,9 +70,13 @@ def main():
     #login page
     driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[1]/div[2]/div[1]/input").send_keys("")
     driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[2]/div[2]/div[1]/input").send_keys("")
-    #checkbox check logic here
-    driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input").click()
-    driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[4]/button").click()
+
+    #checkbox check logic
+    cb_chk=driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input")
+    print(cb_chk.is_selected())
+    if cb_chk.is_selected()==False:
+        driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input").click()
+        driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[4]/button").click()
 
     result=findingByPlace()
     print(result)
