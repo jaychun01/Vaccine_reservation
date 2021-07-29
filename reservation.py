@@ -16,7 +16,7 @@ def searchingCalendar():
 
     #click calendar
     driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/form/div[3]/div[3]/div[1]").click()
-    time.sleep(3)
+    #time.sleep(3)
     # in next 3 months
     for i in range(3):
         #it shows green color when reservation is available
@@ -33,31 +33,36 @@ def searchingCalendar():
                 beepsound()
         #next month click
         driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div[1]/div[2]/header/span[3]").click()
-    month_chk="none"
+    month_chk="zzzzz"
+    print(month_chk)
+    if month_chk=="zzzzz":
+        driver.get(url)
+
     return month_chk
 
 def findingByPlace():
-    time.sleep(3)
-    # finding in detail by place
-    driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[4]/button").click()
-    driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/button[1]").click()
-
-    #checkbox check logic
-    # finding in avaiable only
-    cb_chk=driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input")
-    print(cb_chk.is_selected())
-    if cb_chk.is_selected()==False:
-        driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input").click()
-        time.sleep(5)
-    #retrun value check
-    chk=""
-    try:
-        driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/ul/li[1]").click()
-        chk=searchingCalendar()
-    except:
-        driver.get(url)
-        findingByPlace()
+    chk="zzzzz"
     print(chk)
+    while chk=="zzzzz":
+        time.sleep(3)
+        # finding in detail by place
+        driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[4]/button").click()
+        driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/div/div/button[1]").click()
+
+        #checkbox check logic
+        # finding in avaiable only
+        cb_chk=driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input")
+        print(cb_chk.is_selected())
+        if cb_chk.is_selected()==False:
+            driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/header/label/input").click()
+            time.sleep(5)
+        try:
+            driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/nav/ul/li[1]").click()
+            #retrun value chk=none then loop again
+            chk=searchingCalendar()
+        except:
+            driver.get(url)
+
 
 def main():
     global url
@@ -77,7 +82,7 @@ def main():
     if cb_chk.is_selected()==False:
         driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[3]/input").click()
         driver.find_element_by_xpath("/html/body/div[1]/div/div/div/form/div[4]/button").click()
-
+    time.sleep(3)
     result=findingByPlace()
     print(result)
 
